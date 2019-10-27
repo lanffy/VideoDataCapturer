@@ -202,19 +202,16 @@ int main(int argc, char** argv)
 			string tmpfilename = "CloudData.xyz";
 			outfile.open(tmpfilename);
 			float x = 0.0, y = 0.0, z = 0.0, depthv = 0.0;
-			float i, j, k;
-			for (k = 0; k < 1; k++)
+			float i, j;
+			for (i = 0; i < oniDepthImg.getHeight(); i++)
 			{
-				for (i = 0; i < oniDepthImg.getHeight(); i++)
+				for (j = 0; j < oniDepthImg.getWidth(); j++)
 				{
-					for (j = 0; j < oniDepthImg.getWidth(); j++)
-					{
-						int k = i;
-						int m = j;
-						depthv = pDepth[k * oniDepthImg.getWidth() + m];
-						CoordinateConverter::convertDepthToWorld(oniDepthStream, j, i, depthv, &x, &y, &z);
-						outfile << x << " " << y << " " << z << std::endl;
-					}
+					int k = i;
+					int m = j;
+					depthv = pDepth[k * oniDepthImg.getWidth() + m];
+					CoordinateConverter::convertDepthToWorld(oniDepthStream, j, i, depthv, &x, &y, &z);
+					outfile << x << " " << y << " " << z << std::endl;
 				}
 			}
 			outfile.close();
